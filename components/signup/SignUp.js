@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useAuth } from '../../providers/AuthUserContext';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,6 +31,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const { createUserWithEmailAndPassword } = useAuth();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

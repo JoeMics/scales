@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { auth } from '../services/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
 
 const formatAuthUser = (user) => ({
   uid: user.id,
@@ -24,6 +29,17 @@ export default function useFirebaseAuth() {
     setLoading(false);
   };
 
+  const clear = () => {
+    setAuthUser(null);
+    setLoading(true);
+  };
+
+  const signInEmail = (auth, email, password) => signInWithEmailAndPassword(auth, email, password);
+
+  const createEmail = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+
+  const handleSignOut = () => signOut(auth);
+
   // listens for Firebase state change
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged);
@@ -33,5 +49,8 @@ export default function useFirebaseAuth() {
   return {
     authUser,
     loading,
+    signInEmail,
+    createEmail,
+    handleSignOut,
   };
 }
