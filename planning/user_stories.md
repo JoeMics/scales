@@ -10,3 +10,5 @@
 - I want to choose a snake to keep track because I have multiple snakes
 - I want to see a graph of weights because I want to visualize the weight trends easily
 - I want to see the average time it takes for my snake to shed, eat, and defecate
+- I want to edit/delete my old data because sometimes I make mistakes on data entry
+- I want to be able to filter my data, because sometimes I'm only interested in one type
