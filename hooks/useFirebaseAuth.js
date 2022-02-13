@@ -34,11 +34,11 @@ export default function useFirebaseAuth() {
     setLoading(true);
   };
 
-  const signInEmail = (auth, email, password) => signInWithEmailAndPassword(auth, email, password);
+  const signInEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
 
   const createEmail = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 
-  const handleSignOut = () => signOut(auth);
+  const handleSignOut = () => signOut(auth).then(clear);
 
   // listens for Firebase state change
   useEffect(() => {

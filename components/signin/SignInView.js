@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState } from 'react';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +14,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Alert } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useAuth } from '../../providers/AuthUserContext';
 
 function Copyright(props) {
   return (
@@ -31,14 +36,22 @@ const theme = createTheme();
 export default function SignInView(props) {
   const { signInView, setSignInView } = props;
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const router = useRouter();
+  const { signInEmail } = useAuth();
+
   const handleSubmit = (event) => {
+    setError(null);
+    signInEmail(email, password)
+      .then((authUser) => {
+        router.push('/');
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
   };
 
   return (
@@ -66,6 +79,8 @@ export default function SignInView(props) {
               fullWidth
               id="email"
               label="Email Address"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               name="email"
               autoComplete="email"
               autoFocus
@@ -74,6 +89,8 @@ export default function SignInView(props) {
               margin="normal"
               required
               fullWidth
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               name="password"
               label="Password"
               type="password"
@@ -84,6 +101,8 @@ export default function SignInView(props) {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {error && <Alert severity="error">{error}</Alert>}
+
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
