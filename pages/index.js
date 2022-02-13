@@ -3,8 +3,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import LoggedIn from '../components/loggedin/LoggedIn';
-import SignUp from '../components/signup/SignUp';
-import SignIn from '../components/signin/SignIn';
 import Dashboard from '../components/dashboard/Dashboard';
 
 export default function Home() {

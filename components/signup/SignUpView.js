@@ -20,7 +20,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Scales
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -30,8 +30,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
-  const { createUserWithEmailAndPassword } = useAuth();
+export default function SignUpView(props) {
+  const { createEmail } = useAuth();
+  const { signInView, setSignInView } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -63,27 +64,6 @@ export default function SignUp() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -106,9 +86,14 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                <TextField
+                  required
+                  fullWidth
+                  name="password-confirm"
+                  label="Confirm Password"
+                  type="password"
+                  id="password-confirm"
+                  autoComplete="new-password"
                 />
               </Grid>
             </Grid>
@@ -117,7 +102,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" onClick={(e) => setSignInView('signin')}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

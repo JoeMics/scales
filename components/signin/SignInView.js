@@ -28,7 +28,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignInView(props) {
+  const { signInView, setSignInView } = props;
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -92,7 +94,13 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link
+                  href="#"
+                  variant="body2"
+                  onClick={(e) => {
+                    setSignInView('signup');
+                  }}
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

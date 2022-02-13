@@ -1,12 +1,12 @@
-import { createContext, useContext, Context } from 'react';
+import { createContext, useContext } from 'react';
 import useFirebaseAuth from '../hooks/useFirebaseAuth';
 
 const authUserContext = createContext({
   authUser: null,
   loading: true,
-  signInWithEmailAndPassword: async () => {},
-  createUserWithEmailAndPassword: async () => {},
-  signOut: async () => {},
+  signInEmail: async () => {},
+  createEmail: async () => {},
+  handleSignOut: async () => {},
 });
 
 export function AuthUserProvider({ children }) {
