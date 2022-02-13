@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useAuth } from '../../providers/AuthUserContext';
 
 import Avatar from '@mui/material/Avatar';
@@ -14,6 +16,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Alert } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -31,17 +34,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUpView(props) {
-  const { createEmail } = useAuth();
   const { signInView, setSignInView } = props;
+
+  const [email, setEmail] = useState('');
+  const [passwordOne, setPasswordOne] = useState('');
+  const [passwordTwo, setPasswordTwo] = useState('');
+  const router = useRouter();
+  const [error, setError] = useState(null);
+
+  const { createEmail } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    setError(null);
+
+    if (passwordOne === passwordTwo) {
+      createEmail(email, passwordOne)
+        .then(() => {
+          console.log('Success. The user is created in Firebase');
+          return router.push('/');
+        })
+        .catch((error) => setError(error.message));
+    }
+
+    setError('Password do not match');
   };
 
   return (
@@ -72,6 +88,8 @@ export default function SignUpView(props) {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -83,6 +101,8 @@ export default function SignUpView(props) {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={passwordOne}
+                  onChange={(event) => setPasswordOne(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -94,7 +114,10 @@ export default function SignUpView(props) {
                   type="password"
                   id="password-confirm"
                   autoComplete="new-password"
+                  value={passwordTwo}
+                  onChange={(event) => setPasswordTwo(event.target.value)}
                 />
+                {error && <Alert severity="error">{error}</Alert>}
               </Grid>
             </Grid>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
