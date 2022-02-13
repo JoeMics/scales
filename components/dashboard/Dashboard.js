@@ -21,6 +21,8 @@ import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import { Button } from '@mui/material';
+import { useAuth } from '../../providers/AuthUserContext';
 
 function Copyright(props) {
   return (
@@ -85,6 +87,7 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
+  const { handleSignOut } = useAuth();
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -93,7 +96,7 @@ function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar sx={{ backgroundColor: 'black' }} position="absolute" open={open}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -114,11 +117,19 @@ function DashboardContent() {
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Button
+              variant="contained"
+              sx={{
+                color: 'black',
+                backgroundColor: 'orange',
+                '&:hover': { color: 'black', backgroundColor: 'orange' },
+              }}
+              onClick={(e) => {
+                handleSignOut();
+              }}
+            >
+              LOG OUT
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
