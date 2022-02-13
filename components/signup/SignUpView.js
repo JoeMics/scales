@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../providers/AuthUserContext';
+import useFirestore from '../../hooks/useFirestore';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -17,6 +18,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Alert } from '@mui/material';
+import { collection, addDoc } from 'firebase/firestore';
 
 function Copyright(props) {
   return (
@@ -43,16 +45,18 @@ export default function SignUpView(props) {
   const [error, setError] = useState(null);
 
   const { createEmail } = useAuth();
+  const { updateUser } = useFirestore();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setError(null);
 
     if (passwordOne === passwordTwo) {
-      createEmail(email, passwordOne)
-        .then(() => {
-          console.log('Success. The user is created in Firebase');
-          return router.push('/');
+      return createEmail(email, passwordOne)
+        .then(async (authUser) => {
+          const { uid, email } = authUser.user;
+          await updateUser(uid, email);
+          router.push('/');
         })
         .catch((error) => setError(error.message));
     }
