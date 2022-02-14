@@ -25,6 +25,7 @@ import Orders from './Orders';
 import { Button, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useAuth } from '../../providers/AuthUserContext';
 import AddSnake from './AddSnake';
+import AddEvent from './AddEvent';
 
 function Copyright(props) {
   return (
@@ -89,6 +90,7 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
   const [openAddSnake, setOpenAddSnake] = React.useState(false);
+  const [openAddEvent, setOpenAddEvent] = React.useState(false);
   const [open, setOpen] = React.useState(true);
   const { handleSignOut, authUser } = useAuth();
   const toggleDrawer = () => {
@@ -149,6 +151,16 @@ function DashboardContent() {
                 <DashboardIcon />
               </ListItemIcon>
               <ListItemText primary="Snek" />
+            </ListItemButton>
+            <ListItemButton
+              onClick={(e) => {
+                setOpenAddEvent(true);
+              }}
+            >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Add Event" />
             </ListItemButton>
             <Divider sx={{ my: 1 }} />
             <ListItemButton
@@ -214,6 +226,7 @@ function DashboardContent() {
         </Box>
       </Box>
       {openAddSnake && <AddSnake openAddSnake={openAddSnake} setOpenAddSnake={setOpenAddSnake} />}
+      {openAddEvent && <AddEvent openAddEvent={openAddEvent} setOpenAddEvent={setOpenAddEvent} />}
     </ThemeProvider>
   );
 }

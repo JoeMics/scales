@@ -13,7 +13,19 @@ export default function useFirestore() {
     }
   };
 
+  const addNewSnake = async (name, email) => {
+    try {
+      await addDoc(collection(db, 'snakes'), {
+        user_email: email,
+        name,
+      });
+    } catch (e) {
+      console.error('Error adding document: ', e);
+    }
+  };
+
   return {
     updateUser,
+    addNewSnake,
   };
 }
