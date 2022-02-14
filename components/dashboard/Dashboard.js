@@ -15,14 +15,16 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
-import { Button } from '@mui/material';
+import { Button, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useAuth } from '../../providers/AuthUserContext';
+import AddSnake from './AddSnake';
 
 function Copyright(props) {
   return (
@@ -86,8 +88,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  const [openAddSnake, setOpenAddSnake] = React.useState(false);
   const [open, setOpen] = React.useState(true);
-  const { handleSignOut } = useAuth();
+  const { handleSignOut, authUser } = useAuth();
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -117,19 +120,9 @@ function DashboardContent() {
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
               Dashboard
             </Typography>
-            <Button
-              variant="contained"
-              sx={{
-                color: 'black',
-                backgroundColor: 'orange',
-                '&:hover': { color: 'black', backgroundColor: 'orange' },
-              }}
-              onClick={(e) => {
-                handleSignOut();
-              }}
-            >
-              LOG OUT
-            </Button>
+            <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+              {authUser && authUser.email}
+            </Typography>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -147,9 +140,27 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <ListItemButton
+              onClick={(e) => {
+                setOpenAddSnake(true);
+              }}
+            >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Snek" />
+            </ListItemButton>
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            <ListItemButton
+              onClick={(e) => {
+                handleSignOut();
+              }}
+            >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="logout" />
+            </ListItemButton>
           </List>
         </Drawer>
         <Box
@@ -202,6 +213,7 @@ function DashboardContent() {
           </Container>
         </Box>
       </Box>
+      {openAddSnake && <AddSnake openAddSnake={openAddSnake} setOpenAddSnake={setOpenAddSnake} />}
     </ThemeProvider>
   );
 }
