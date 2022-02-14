@@ -40,7 +40,7 @@ export default function useFirebaseAuth() {
 
   const handleSignOut = () => signOut(auth).then(clear);
 
-  // listens for Firebase state change
+  // listens for Firebase state change 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged);
     return () => unsubscribe();
