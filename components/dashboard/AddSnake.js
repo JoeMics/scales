@@ -10,14 +10,10 @@ import FormControl from '@mui/material/FormControl';
 import useFirestore from '../../hooks/useFirestore';
 
 export default function AddSnake(props) {
-  const { setOpenAddSnake } = props;
+  const { openAddSnake, setOpenAddSnake } = props;
   const { addNewSnake } = useFirestore();
 
   const [name, setName] = useState('');
-
-  const handleClickOpen = () => {
-    setOpenAddSnake(true);
-  };
 
   const handleClose = () => {
     setOpenAddSnake(false);
@@ -30,10 +26,7 @@ export default function AddSnake(props) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={(e) => handleClickOpen()}>
-        Open form dialog
-      </Button>
-      <Dialog open={(e) => handleClickOpen()} onClose={(e) => handleClose()}>
+      <Dialog open={openAddSnake} onClose={handleClose}>
         <form onSubmit={handleSubmit}>
           <DialogTitle>ADD SNEK</DialogTitle>
           <DialogContent>

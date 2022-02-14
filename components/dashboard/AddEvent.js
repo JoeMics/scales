@@ -12,15 +12,11 @@ import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 
 export default function AddEvent(props) {
-  const { setOpenAddEvent } = props;
+  const { openAddEvent, setOpenAddEvent } = props;
   const [type, setType] = useState('Eat');
 
   const handleChange = (event) => {
     setType(event.target.value);
-  };
-
-  const handleClickOpen = () => {
-    setOpenAddEvent(true);
   };
 
   const handleClose = () => {
@@ -29,10 +25,7 @@ export default function AddEvent(props) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={(e) => handleClickOpen()}>
-        Open form dialog
-      </Button>
-      <Dialog open={(e) => handleClickOpen()} onClose={(e) => handleClose()}>
+      <Dialog open={openAddEvent} onClose={handleClose}>
         <DialogTitle>ADD EVENT</DialogTitle>
         <DialogContent>
           <DialogContentText>
