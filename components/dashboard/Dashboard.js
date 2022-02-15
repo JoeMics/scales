@@ -26,6 +26,7 @@ import { Button, ListItemButton, ListItemIcon, ListItemText } from '@mui/materia
 import { useAuth } from '../../providers/AuthUserContext';
 import AddSnake from './AddSnake';
 import AddEvent from './AddEvent';
+import styles from '../../styles/Dashboard.module.css';
 
 function Copyright(props) {
   return (
@@ -101,7 +102,7 @@ function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar sx={{ backgroundColor: 'black' }} position="absolute" open={open}>
+        <AppBar sx={{ backgroundColor: 'black' }} className={styles.appbar} position="absolute" open={open}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
