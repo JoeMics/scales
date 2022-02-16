@@ -17,12 +17,10 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
-import { Button, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useAuth } from '../../providers/AuthUserContext';
 import AddSnake from './AddSnake';
 import AddEvent from './AddEvent';
@@ -102,7 +100,12 @@ function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar sx={{ backgroundColor: 'black' }} className={styles.appbar} position="absolute" open={open}>
+        <AppBar
+          sx={{ backgroundColor: 'black' }}
+          className={styles.appbar}
+          position="absolute"
+          open={open}
+        >
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed

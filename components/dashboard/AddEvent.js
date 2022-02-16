@@ -9,7 +9,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import Box from '@mui/material/Box';
 
 export default function AddEvent(props) {
   const { openAddEvent, setOpenAddEvent } = props;
