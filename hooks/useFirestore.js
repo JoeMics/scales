@@ -1,10 +1,10 @@
 import { db } from '../services/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 
 export default function useFirestore() {
   const updateUser = async (uid, email) => {
     try {
-      await addDoc(collection(db, 'users'), {
+      await setDoc(doc(db, 'users', uid), {
         email: email,
         id: uid,
       });
