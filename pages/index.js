@@ -1,11 +1,14 @@
 import Head from 'next/head';
-import { useState } from 'react';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import LoggedIn from '../components/loggedin/LoggedIn';
 import Dashboard from '../components/dashboard/Dashboard';
+import Loading from '../components/dashboard/Loading';
+import { Modal } from '@mui/material';
+import { useAuth } from '../providers/AuthUserContext';
 
 export default function Home() {
+  const { loading } = useAuth();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,7 +18,12 @@ export default function Home() {
       </Head>
 
       <LoggedIn>
-        <Dashboard />
+        {loading && (
+          <Modal open={loading} sx={{ width: '100vw', height: '100vh' }}>
+            <Loading />
+          </Modal>
+        )}
+        {!loading && <Dashboard />}
       </LoggedIn>
     </div>
   );

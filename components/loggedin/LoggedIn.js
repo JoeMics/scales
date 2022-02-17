@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../providers/AuthUserContext';
+import { Modal } from '@mui/material';
+import Loading from '../dashboard/Loading';
 
 // import {Container, Row, Col} from 'reactstrap';
 
@@ -13,7 +15,7 @@ const LoggedIn = (props) => {
     if (!loading && !authUser) router.push('/signin');
   }, [authUser, loading]);
 
-  return props.children;
+  return <>{authUser && props.children}</>;
 };
 
 export default LoggedIn;

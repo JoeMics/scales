@@ -1,0 +1,24 @@
+.loading::before {
+  animation: 1.5s linear infinite spinner;
+  animation-play-state: inherit;
+  border: solid 5px grey;
+  border-bottom-color: black;
+  border-radius: 50%;
+  content: '';
+  height: 3rem;
+  width: 3rem;
+  position: absolute;
+  inset: 50%;
+  z-index: 999;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+}
+
+@keyframes spinner {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
