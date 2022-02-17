@@ -7,10 +7,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useFirestore from '../../hooks/useFirestore';
+import { useAuth } from '../../providers/AuthUserContext';
+import Loading from './Loading';
+import { Modal } from '@mui/material';
 
 export default function AddSnake(props) {
   const { openAddSnake, setOpenAddSnake } = props;
-  const { addNewSnake } = useFirestore();
+  const { addNewSnake, loading } = useFirestore();
+  const { authUser } = useAuth();
 
   const [name, setName] = useState('');
 
@@ -20,12 +24,21 @@ export default function AddSnake(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addNewSnake(name, 'josephmicla@gmail.com');
+
+    try {
+      await addNewSnake(name, authUser.uid);
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div>
       <Dialog open={openAddSnake} onClose={handleClose}>
+        <Modal open={loading} sx={{ width: '100vw', height: '100vh' }}>
+          <Loading />
+        </Modal>
         <form onSubmit={handleSubmit}>
           <DialogTitle>ADD SNEK</DialogTitle>
           <DialogContent>
@@ -47,7 +60,7 @@ export default function AddSnake(props) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">Subscribe</Button>
+            <Button type="submit">Add Snake</Button>
           </DialogActions>
         </form>
       </Dialog>
