@@ -154,7 +154,7 @@ function DashboardContent() {
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
-              <ListItemText primary="Snek" />
+              <ListItemText primary="New Snake" />
             </ListItemButton>
             <ListItemButton
               onClick={(e) => {

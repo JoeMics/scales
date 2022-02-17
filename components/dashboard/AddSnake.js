@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useFirestore from '../../hooks/useFirestore';
 import { useAuth } from '../../providers/AuthUserContext';
 import Loading from './Loading';
-import { Modal } from '@mui/material';
+import { Alert, Modal } from '@mui/material';
 
 export default function AddSnake(props) {
   const { openAddSnake, setOpenAddSnake } = props;
@@ -17,6 +17,7 @@ export default function AddSnake(props) {
   const { authUser } = useAuth();
 
   const [name, setName] = useState('');
+  const [error, setError] = useState();
 
   const handleClose = () => {
     setOpenAddSnake(false);
@@ -29,7 +30,7 @@ export default function AddSnake(props) {
       await addNewSnake(name, authUser.uid);
       handleClose();
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
@@ -40,12 +41,9 @@ export default function AddSnake(props) {
           <Loading />
         </Modal>
         <form onSubmit={handleSubmit}>
-          <DialogTitle>ADD SNEK</DialogTitle>
+          <DialogTitle>New Snake</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send
-              updates occasionally.
-            </DialogContentText>
+            <DialogContentText>Add a new snake to your dashboard.</DialogContentText>
             <TextField
               autoFocus
               margin="dense"
@@ -58,9 +56,10 @@ export default function AddSnake(props) {
               onChange={(event) => setName(event.target.value)}
             />
           </DialogContent>
+          {error && <Alert severity="error">{error}</Alert>}
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">Add Snake</Button>
+            <Button type="submit">Create</Button>
           </DialogActions>
         </form>
       </Dialog>
