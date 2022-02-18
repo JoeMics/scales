@@ -18,13 +18,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Chart from './Chart';
-import Deposits from './Deposits';
+import Deposits from './SnakeStats';
 import Orders from './Orders';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useAuth } from '../../providers/AuthUserContext';
 import AddSnake from './AddSnake';
 import AddEvent from './AddEvent';
 import styles from '../../styles/Dashboard.module.css';
+import SnakeStats from './SnakeStats';
 
 function Copyright(props) {
   return (
@@ -205,7 +206,7 @@ function DashboardContent() {
                   <Chart />
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+              {/* Snake Stats */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -215,10 +216,11 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Deposits />
+                  <SnakeStats />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
+
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <Orders />

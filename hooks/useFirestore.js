@@ -1,5 +1,5 @@
 import { db } from '../services/firebase';
-import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
 import { useState } from 'react';
 
 export default function useFirestore() {
@@ -35,9 +35,28 @@ export default function useFirestore() {
     }
   };
 
+  const fetchSnakeById = async (id) => {
+    try {
+      setLoading(true);
+
+      const docRef = doc(db, 'snakes', id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setLoading(false);
+        return docSnap.data();
+      }
+    } catch (e) {
+      console.error('Error fetching document', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     updateUser,
     addNewSnake,
+    fetchSnakeById,
     loading,
   };
 }
