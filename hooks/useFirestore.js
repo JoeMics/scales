@@ -1,5 +1,5 @@
 import { db } from '../services/firebase';
-import { collection, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { useState } from 'react';
 
 export default function useFirestore() {
@@ -53,10 +53,30 @@ export default function useFirestore() {
     }
   };
 
+  const fetchAllSnakes = async (userId) => {
+    try {
+      setLoading(true);
+
+      const q = query(collection(db, 'snakes'), where('user_uid', '==', userId));
+      const querySnapshot = await getDocs(q);
+
+      setLoading(false);
+      return querySnapshot.docs.map((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        return doc.data();
+      });
+    } catch (e) {
+      console.error('Error fetching document', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     updateUser,
     addNewSnake,
     fetchSnakeById,
+    fetchAllSnakes,
     loading,
   };
 }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -9,7 +9,6 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -18,7 +17,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Chart from './Chart';
-import Deposits from './SnakeStats';
 import Orders from './Orders';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useAuth } from '../../providers/AuthUserContext';
@@ -26,6 +24,7 @@ import AddSnake from './AddSnake';
 import AddEvent from './AddEvent';
 import styles from '../../styles/Dashboard.module.css';
 import SnakeStats from './SnakeStats';
+import useFirestore from '../../hooks/useFirestore';
 
 function Copyright(props) {
   return (
@@ -89,13 +88,29 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const [openAddSnake, setOpenAddSnake] = React.useState(false);
-  const [openAddEvent, setOpenAddEvent] = React.useState(false);
-  const [open, setOpen] = React.useState(true);
+  const [openAddSnake, setOpenAddSnake] = useState(false);
+  const [openAddEvent, setOpenAddEvent] = useState(false);
+  const [allSnakes, setAllSnakes] = useState([]);
+  const [open, setOpen] = useState(true);
+  const [snake, setSnake] = useState({});
+
+  // Custom hooks
+  const { fetchAllSnakes } = useFirestore();
   const { handleSignOut, authUser } = useAuth();
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  // Get's the first snake on the list on render
+  useEffect(() => {
+    const getEverything = async () => {
+      const res = await fetchAllSnakes(authUser.uid);
+      setSnake(res[0] || {});
+      setAllSnakes(res || []);
+    };
+
+    getEverything();
+  }, [openAddSnake]);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -216,7 +231,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <SnakeStats />
+                  <SnakeStats allSnakes={allSnakes} snake={snake} setSnake={setSnake} />
                 </Paper>
               </Grid>
               {/* Recent Orders */}

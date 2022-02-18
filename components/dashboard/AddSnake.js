@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useFirestore from '../../hooks/useFirestore';
 import { useAuth } from '../../providers/AuthUserContext';
 import Loading from './Loading';
-import { Alert, Modal } from '@mui/material';
+import { Alert } from '@mui/material';
 
 export default function AddSnake(props) {
   const { openAddSnake, setOpenAddSnake } = props;
@@ -37,9 +37,7 @@ export default function AddSnake(props) {
   return (
     <div>
       <Dialog open={openAddSnake} onClose={handleClose}>
-        <Modal open={loading} sx={{ width: '100vw', height: '100vh' }}>
-          <Loading />
-        </Modal>
+        <Loading loading={loading} />
         <form onSubmit={handleSubmit}>
           <DialogTitle>New Snake</DialogTitle>
           <DialogContent>
