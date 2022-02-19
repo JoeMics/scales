@@ -2,6 +2,7 @@ import { db } from '../services/firebase';
 import { collection, addDoc, doc, setDoc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { useState } from 'react';
 
+// TODO: Move firestore logic to api folder
 export default function useFirestore() {
   const [loading, setLoading] = useState(false);
 
