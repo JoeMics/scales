@@ -1,10 +1,22 @@
 import { db } from '../services/firebase';
-import { collection, addDoc, doc, setDoc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  Timestamp,
+} from 'firebase/firestore';
 import { useState } from 'react';
+import useFirebaseAuth from './useFirebaseAuth';
 
 // TODO: Move firestore logic to api folder
 export default function useFirestore() {
   const [loading, setLoading] = useState(false);
+  const { authUser } = useFirebaseAuth();
 
   const updateUser = async (uid, email) => {
     try {
@@ -64,10 +76,25 @@ export default function useFirestore() {
       setLoading(false);
       return querySnapshot.docs.map((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        return doc.data();
+        return { id: doc.id, ...doc.data() };
       });
     } catch (e) {
       console.error('Error fetching document', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createEvent = async (snakeId, { type, date, notes }) => {
+    try {
+      setLoading(true);
+      return await addDoc(collection(db, 'snakes', snakeId, 'events'), {
+        type,
+        notes,
+        date: Timestamp.fromDate(new Date(date)),
+      });
+    } catch (e) {
+      console.error('Error creating document', e);
     } finally {
       setLoading(false);
     }
@@ -78,6 +105,7 @@ export default function useFirestore() {
     addNewSnake,
     fetchSnakeById,
     fetchAllSnakes,
+    createEvent,
     loading,
   };
 }

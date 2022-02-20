@@ -9,6 +9,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import useFirestore from '../../hooks/useFirestore';
+import Loading from './Loading';
 
 // Output:
 // Today's date formatted as YYYY-MM-DD
@@ -20,10 +22,12 @@ const getTodayString = () => {
 };
 
 export default function AddEvent(props) {
-  const { openAddEvent, setOpenAddEvent } = props;
+  const { openAddEvent, setOpenAddEvent, snake } = props;
   const [type, setType] = useState('Eat');
   const [date, setDate] = useState(getTodayString());
   const [notes, setNotes] = useState('');
+
+  const { createEvent, loading } = useFirestore();
 
   const handleChange = (event) => {
     setType(event.target.value);
@@ -33,18 +37,22 @@ export default function AddEvent(props) {
     setOpenAddEvent(false);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log({
+    const data = {
       date,
       type,
-      notes,
-    });
+      notes: type === 'Weight' ? parseInt(notes) : notes,
+    };
+
+    await createEvent(snake.id, data);
+    handleClose();
   };
 
   return (
     <div>
+      <Loading loading={loading} />
       <Dialog open={openAddEvent} onClose={handleClose}>
         <form onSubmit={handleSubmit}>
           <DialogTitle>ADD EVENT</DialogTitle>

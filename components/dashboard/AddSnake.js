@@ -52,6 +52,7 @@ export default function AddSnake(props) {
               variant="standard"
               value={name}
               onChange={(event) => setName(event.target.value)}
+              required
             />
           </DialogContent>
           {error && <Alert severity="error">{error}</Alert>}
