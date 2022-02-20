@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import DropDown from './DropDown';
+import DropDown from './SnakeDropDown';
 
 export default function SnakeStats(props) {
   return (

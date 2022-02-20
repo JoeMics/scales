@@ -11,6 +11,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import useFirestore from '../../hooks/useFirestore';
 import Loading from './Loading';
+import EventDropDown from './EventDropDown';
+import SnakeDropDown from './SnakeDropDown';
 
 // Output:
 // Today's date formatted as YYYY-MM-DD
@@ -22,10 +24,11 @@ const getTodayString = () => {
 };
 
 export default function AddEvent(props) {
-  const { openAddEvent, setOpenAddEvent, snake } = props;
+  const { openAddEvent, setOpenAddEvent, snake, setSnake, allSnakes } = props;
   const [type, setType] = useState('Eat');
   const [date, setDate] = useState(getTodayString());
   const [notes, setNotes] = useState('');
+  const events = ['Eat', 'Shed', 'Weight', 'Poop'];
 
   const { createEvent, loading } = useFirestore();
 
@@ -58,6 +61,13 @@ export default function AddEvent(props) {
           <DialogTitle>ADD EVENT</DialogTitle>
           <DialogContent>
             <DialogContentText>Make a note about your snake.</DialogContentText>
+            <SnakeDropDown snake={snake} allSnakes={allSnakes} setSnake={setSnake} />
+            <EventDropDown
+              events={events}
+              handleChange={handleChange}
+              type={type}
+              setType={setType}
+            />
             <TextField
               autoFocus
               margin="dense"
@@ -68,28 +78,13 @@ export default function AddEvent(props) {
               value={date}
               onChange={(event) => setDate(event.target.value)}
             />
-            <InputLabel id="type">Type</InputLabel>
+            {/* <InputLabel id="type">Type</InputLabel>
             <Select labelId="type" id="select-type" value={type} onChange={handleChange}>
               <MenuItem value={'Eat'}>Eat</MenuItem>
               <MenuItem value={'Shed'}>Shed</MenuItem>
               <MenuItem value={'Weight'}>Weight</MenuItem>
               <MenuItem value={'Poop'}>Poop</MenuItem>
-            </Select>
-            {type !== 'Weight' && (
-              <TextField
-                autoFocus
-                margin="dense"
-                id="notes"
-                label="Notes"
-                type="text"
-                multiline
-                minRows={5}
-                fullWidth
-                variant="standard"
-                value={notes}
-                onChange={(event) => setNotes(event.target.value)}
-              />
-            )}
+            </Select> */}
             {type === 'Weight' && (
               <TextField
                 autoFocus
@@ -104,6 +99,19 @@ export default function AddEvent(props) {
                 onChange={(event) => setNotes(event.target.value)}
               />
             )}
+            <TextField
+              autoFocus
+              margin="dense"
+              id="notes"
+              label="Notes"
+              type="text"
+              multiline
+              minRows={5}
+              fullWidth
+              variant="standard"
+              value={notes}
+              onChange={(event) => setNotes(event.target.value)}
+            />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
