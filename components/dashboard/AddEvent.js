@@ -56,7 +56,7 @@ export default function AddEvent(props) {
   return (
     <div>
       <Loading loading={loading} />
-      <Dialog open={openAddEvent} onClose={handleClose}>
+      <Dialog open={openAddEvent} onClose={handleClose} fullWidth maxWidth="md">
         <form onSubmit={handleSubmit}>
           <DialogTitle>ADD EVENT</DialogTitle>
           <DialogContent>
@@ -73,18 +73,11 @@ export default function AddEvent(props) {
               margin="dense"
               id="date"
               type="date"
-              fullWidth
+              maxWidth="sm"
               variant="standard"
               value={date}
               onChange={(event) => setDate(event.target.value)}
             />
-            {/* <InputLabel id="type">Type</InputLabel>
-            <Select labelId="type" id="select-type" value={type} onChange={handleChange}>
-              <MenuItem value={'Eat'}>Eat</MenuItem>
-              <MenuItem value={'Shed'}>Shed</MenuItem>
-              <MenuItem value={'Weight'}>Weight</MenuItem>
-              <MenuItem value={'Poop'}>Poop</MenuItem>
-            </Select> */}
             {type === 'Weight' && (
               <TextField
                 autoFocus
