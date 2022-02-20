@@ -85,9 +85,17 @@ export default function useFirestore() {
     }
   };
 
-  const createEvent = async (snakeId, { type, date, notes }) => {
+  const createEvent = async (snakeId, { type, date, weight, notes }) => {
     try {
       setLoading(true);
+      if (weight) {
+        return await addDoc(collection(db, 'snakes', snakeId, 'events'), {
+          type,
+          notes,
+          weight,
+          date: Timestamp.fromDate(new Date(date)),
+        });
+      }
       return await addDoc(collection(db, 'snakes', snakeId, 'events'), {
         type,
         notes,

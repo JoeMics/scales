@@ -28,6 +28,7 @@ export default function AddEvent(props) {
   const [type, setType] = useState('Eat');
   const [date, setDate] = useState(getTodayString());
   const [notes, setNotes] = useState('');
+  const [weight, setWeight] = useState();
   const events = ['Eat', 'Shed', 'Weight', 'Poop'];
 
   const { createEvent, loading } = useFirestore();
@@ -46,7 +47,9 @@ export default function AddEvent(props) {
     const data = {
       date,
       type,
-      notes: type === 'Weight' ? parseInt(notes) : notes,
+      // notes: type === 'Weight' ? parseInt(notes) : notes,
+      weight: weight ? weight : null,
+      notes,
     };
 
     await createEvent(snake.id, data);
@@ -88,8 +91,8 @@ export default function AddEvent(props) {
                 placeholder="ex. 200"
                 fullWidth
                 variant="standard"
-                value={notes}
-                onChange={(event) => setNotes(event.target.value)}
+                value={weight}
+                onChange={(event) => setWeight(event.target.value)}
               />
             )}
             <TextField
