@@ -17,7 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Chart from './Chart';
-import Orders from './Orders';
+import Events from './Events';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useAuth } from '../../providers/AuthUserContext';
 import AddSnake from './AddSnake';
@@ -92,10 +92,10 @@ function DashboardContent() {
   const [openAddEvent, setOpenAddEvent] = useState(false);
   const [allSnakes, setAllSnakes] = useState([]);
   const [open, setOpen] = useState(true);
-  const [snake, setSnake] = useState({});
+  const [snake, setSnake] = useState({ name: '', id: '' });
 
   // Custom hooks
-  const { fetchAllSnakes } = useFirestore();
+  const { fetchAllSnakes, fetchEvents } = useFirestore();
   const { handleSignOut, authUser } = useAuth();
   const toggleDrawer = () => {
     setOpen(!open);
@@ -103,14 +103,14 @@ function DashboardContent() {
 
   // Get's the first snake on the list on render
   useEffect(() => {
-    const getEverything = async () => {
+    const getSnakes = async () => {
       const res = await fetchAllSnakes(authUser.uid);
       setSnake(res[0] || {});
       setAllSnakes(res || []);
     };
 
-    getEverything();
-  }, [openAddSnake]);
+    getSnakes();
+  }, []);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -238,7 +238,7 @@ function DashboardContent() {
 
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <Events snake={snake} />
                 </Paper>
               </Grid>
             </Grid>
@@ -248,13 +248,7 @@ function DashboardContent() {
       </Box>
       {openAddSnake && <AddSnake openAddSnake={openAddSnake} setOpenAddSnake={setOpenAddSnake} />}
       {openAddEvent && (
-        <AddEvent
-          openAddEvent={openAddEvent}
-          setOpenAddEvent={setOpenAddEvent}
-          snake={snake}
-          allSnakes={allSnakes}
-          setSnake={setSnake}
-        />
+        <AddEvent openAddEvent={openAddEvent} setOpenAddEvent={setOpenAddEvent} snake={snake} />
       )}
     </ThemeProvider>
   );
