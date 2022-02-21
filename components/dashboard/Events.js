@@ -31,7 +31,7 @@ export default function Orders(props) {
     }
 
     getAllEvents();
-  }, [snake]);
+  }, [fetchEvents]);
 
   return (
     <>

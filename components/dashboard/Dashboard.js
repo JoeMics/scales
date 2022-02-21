@@ -248,7 +248,12 @@ function DashboardContent() {
       </Box>
       {openAddSnake && <AddSnake openAddSnake={openAddSnake} setOpenAddSnake={setOpenAddSnake} />}
       {openAddEvent && (
-        <AddEvent openAddEvent={openAddEvent} setOpenAddEvent={setOpenAddEvent} snake={snake} />
+        <AddEvent
+          openAddEvent={openAddEvent}
+          setOpenAddEvent={setOpenAddEvent}
+          snake={snake}
+          allSnakes={allSnakes}
+        />
       )}
     </ThemeProvider>
   );
