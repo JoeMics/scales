@@ -252,6 +252,7 @@ function DashboardContent() {
           openAddEvent={openAddEvent}
           setOpenAddEvent={setOpenAddEvent}
           snake={snake}
+          setSnake={setSnake}
           allSnakes={allSnakes}
         />
       )}

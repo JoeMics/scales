@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 import useFirestore from '../../hooks/useFirestore';
+import Loading from './Loading';
 
 function preventDefault(event) {
   event.preventDefault();
@@ -20,7 +21,7 @@ export default function Orders(props) {
   const [eventsData, setEventsData] = useState([]);
   const { snake } = props;
 
-  const { fetchEvents } = useFirestore();
+  const { fetchEvents, loading } = useFirestore();
 
   useEffect(() => {
     async function getAllEvents() {
@@ -31,10 +32,11 @@ export default function Orders(props) {
     }
 
     getAllEvents();
-  }, [fetchEvents]);
+  }, [snake]);
 
   return (
     <>
+      <Loading loading={loading} />
       <Title>Recent Orders</Title>
       <Table size="small">
         <TableHead>
