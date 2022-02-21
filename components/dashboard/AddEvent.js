@@ -6,9 +6,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import useFirestore from '../../hooks/useFirestore';
 import Loading from './Loading';
 import EventDropDown from './EventDropDown';
@@ -28,7 +25,7 @@ export default function AddEvent(props) {
   const [type, setType] = useState('Eat');
   const [date, setDate] = useState(getTodayString());
   const [notes, setNotes] = useState('');
-  const [weight, setWeight] = useState();
+  const [weight, setWeight] = useState('');
   const events = ['Eat', 'Shed', 'Weight', 'Poop'];
 
   const { createEvent, loading } = useFirestore();
@@ -76,7 +73,7 @@ export default function AddEvent(props) {
               margin="dense"
               id="date"
               type="date"
-              maxWidth="sm"
+              maxwidth="sm"
               variant="standard"
               value={date}
               onChange={(event) => setDate(event.target.value)}
