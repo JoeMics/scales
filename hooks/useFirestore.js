@@ -37,7 +37,7 @@ export default function useFirestore() {
     try {
       setLoading(true);
 
-      await addDoc(collection(db, 'snakes'), {
+      return await addDoc(collection(db, 'snakes'), {
         user_uid,
         name,
       });
@@ -57,7 +57,7 @@ export default function useFirestore() {
 
       if (docSnap.exists()) {
         setLoading(false);
-        return docSnap.data();
+        return { id: docSnap.id, ...docSnap.data() };
       }
     } catch (e) {
       console.error('Error fetching document', e);
@@ -75,7 +75,6 @@ export default function useFirestore() {
 
       setLoading(false);
       return querySnapshot.docs.map((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         return { id: doc.id, ...doc.data() };
       });
     } catch (e) {
@@ -108,12 +107,31 @@ export default function useFirestore() {
     }
   };
 
+  const fetchEvents = async (snakeId) => {
+    try {
+      setLoading(true);
+      const query = collection(db, 'snakes', snakeId, 'events');
+      const querySnapshot = await getDocs(query);
+
+      setLoading(false);
+
+      if (querySnapshot) {
+        return querySnapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+      }
+    } catch (e) {
+      console.error('Error creating document', e);
+    }
+  };
+
   return {
     updateUser,
     addNewSnake,
     fetchSnakeById,
     fetchAllSnakes,
     createEvent,
+    fetchEvents,
     loading,
   };
 }
