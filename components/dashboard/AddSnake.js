@@ -12,7 +12,7 @@ import Loading from './Loading';
 import { Alert } from '@mui/material';
 
 export default function AddSnake(props) {
-  const { openAddSnake, setOpenAddSnake } = props;
+  const { openAddSnake, setOpenAddSnake, setAllSnakes, setSnake } = props;
   const { addNewSnake, loading } = useFirestore();
   const { authUser } = useAuth();
 
@@ -27,10 +27,12 @@ export default function AddSnake(props) {
     e.preventDefault();
 
     try {
-      await addNewSnake(name, authUser.uid);
+      const snakeDoc = await addNewSnake(name, authUser.uid);
+      setAllSnakes((prev) => [...prev, snakeDoc]);
+      setSnake(() => snakeDoc);
       handleClose();
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
 

@@ -246,7 +246,14 @@ function DashboardContent() {
           </Container>
         </Box>
       </Box>
-      {openAddSnake && <AddSnake openAddSnake={openAddSnake} setOpenAddSnake={setOpenAddSnake} />}
+      {openAddSnake && (
+        <AddSnake
+          openAddSnake={openAddSnake}
+          setOpenAddSnake={setOpenAddSnake}
+          setSnake={setSnake}
+          setAllSnakes={setAllSnakes}
+        />
+      )}
       {openAddEvent && (
         <AddEvent
           openAddEvent={openAddEvent}

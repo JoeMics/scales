@@ -37,10 +37,13 @@ export default function useFirestore() {
     try {
       setLoading(true);
 
-      return await addDoc(collection(db, 'snakes'), {
+      const snakeDoc = await addDoc(collection(db, 'snakes'), {
         user_uid,
         name,
       });
+
+      const docSnap = await getDoc(snakeDoc);
+      return { id: docSnap.id, ...docSnap.data() };
     } catch (e) {
       console.error('Error adding document: ', e);
     } finally {
