@@ -24,7 +24,7 @@ export default function Orders(props) {
   return (
     <>
       <Loading loading={loading} />
-      <Title>{snake.name}'s History</Title>
+      <Title>{snake.name}&apos;s History</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -35,14 +35,16 @@ export default function Orders(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {eventsData.map((event) => (
-            <TableRow key={event.id}>
-              <TableCell>{formatDate(event.date.toDate())}</TableCell>
-              <TableCell>{event.type}</TableCell>
-              <TableCell>{event.notes}</TableCell>
-              <TableCell align="right">{event.weight ? `${event.weight}g` : ''}</TableCell>
-            </TableRow>
-          ))}
+          {eventsData
+            .sort((a, b) => b.date - a.date)
+            .map((event) => (
+              <TableRow key={event.id} onClick={() => console.log(event.id)}>
+                <TableCell>{formatDate(event.date.toDate())}</TableCell>
+                <TableCell>{event.type}</TableCell>
+                <TableCell>{event.notes}</TableCell>
+                <TableCell align="right">{event.weight ? `${event.weight}g` : ''}</TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
