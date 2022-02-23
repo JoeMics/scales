@@ -20,6 +20,8 @@ const data = [
   createData('24:00', undefined),
 ];
 
+console.log(data)
+
 export default function Chart() {
   const theme = useTheme();
 

@@ -37,12 +37,12 @@ export default function Orders(props) {
   return (
     <>
       <Loading loading={loading} />
-      <Title>Recent Orders</Title>
+      <Title>{snake.name}'s History</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Type</TableCell>
+            <TableCell>Event</TableCell>
             <TableCell>Notes</TableCell>
             <TableCell align="right">Weight (grams)</TableCell>
           </TableRow>
@@ -59,7 +59,7 @@ export default function Orders(props) {
         </TableBody>
       </Table>
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
+        see more
       </Link>
     </>
   );
