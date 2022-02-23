@@ -18,21 +18,8 @@ function formatDate(date) {
 }
 
 export default function Orders(props) {
-  const [eventsData, setEventsData] = useState([]);
-  const { snake } = props;
-
-  const { fetchEvents, loading } = useFirestore();
-
-  useEffect(() => {
-    async function getAllEvents() {
-      if (snake.id) {
-        const results = await fetchEvents(snake.id);
-        setEventsData(results);
-      }
-    }
-
-    getAllEvents();
-  }, [snake]);
+  const { snake, eventsData } = props;
+  const { loading } = useFirestore();
 
   return (
     <>

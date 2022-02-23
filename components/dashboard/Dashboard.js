@@ -93,6 +93,7 @@ function DashboardContent() {
   const [allSnakes, setAllSnakes] = useState([]);
   const [open, setOpen] = useState(true);
   const [snake, setSnake] = useState({ name: '', id: '' });
+  const [eventsData, setEventsData] = useState([]);
 
   // Custom hooks
   const { fetchAllSnakes, fetchEvents } = useFirestore();
@@ -111,6 +112,17 @@ function DashboardContent() {
 
     getSnakes();
   }, []);
+
+  useEffect(() => {
+    async function getAllEvents() {
+      if (snake.id) {
+        const results = await fetchEvents(snake.id);
+        setEventsData(results);
+      }
+    }
+
+    getAllEvents();
+  }, [snake]);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -208,7 +220,7 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
+              {/* This is the Chart Component Stuff */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
@@ -218,7 +230,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <Chart eventsData={eventsData} />
                 </Paper>
               </Grid>
               {/* Snake Stats */}
@@ -238,7 +250,7 @@ function DashboardContent() {
 
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', overflowX: 'auto' }}>
-                  <Events snake={snake} />
+                  <Events snake={snake} eventsData={eventsData} />
                 </Paper>
               </Grid>
             </Grid>
