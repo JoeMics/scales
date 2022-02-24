@@ -14,7 +14,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import AddIcon from '@mui/icons-material/Add';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Chart from './Chart';
 import Events from './Events';
@@ -183,7 +184,7 @@ function DashboardContent() {
               }}
             >
               <ListItemIcon>
-                <DashboardIcon />
+                <AddIcon />
               </ListItemIcon>
               <ListItemText primary="Add Snake" />
             </ListItemButton>
@@ -193,7 +194,7 @@ function DashboardContent() {
               }}
             >
               <ListItemIcon>
-                <DashboardIcon />
+                <AddIcon />
               </ListItemIcon>
               <ListItemText primary="Add Event" />
             </ListItemButton>
@@ -204,7 +205,7 @@ function DashboardContent() {
               }}
             >
               <ListItemIcon>
-                <DashboardIcon />
+                <PowerSettingsNewIcon />
               </ListItemIcon>
               <ListItemText primary="logout" />
             </ListItemButton>
