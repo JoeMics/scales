@@ -113,7 +113,7 @@ function DashboardContent() {
     };
 
     getSnakes();
-  }, [deleteSnake]);
+  }, []);
 
   useEffect(() => {
     async function getAllEvents() {
@@ -250,6 +250,7 @@ function DashboardContent() {
                     snake={snake}
                     setSnake={setSnake}
                     setDeleteSnake={setDeleteSnake}
+                    userID={authUser.uid}
                   />
                 </Paper>
               </Grid>
@@ -284,7 +285,14 @@ function DashboardContent() {
         />
       )}
       {deleteSnake && (
-        <DeleteSnake deleteSnake={deleteSnake} setDeleteSnake={setDeleteSnake} snake={snake} />
+        <DeleteSnake
+          deleteSnake={deleteSnake}
+          setDeleteSnake={setDeleteSnake}
+          snake={snake}
+          setSnake={setSnake}
+          setAllSnakes={setAllSnakes}
+          userID={authUser.uid}
+        />
       )}
     </ThemeProvider>
   );
