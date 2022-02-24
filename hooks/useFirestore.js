@@ -147,6 +147,18 @@ export default function useFirestore() {
     }
   };
 
+  const deleteCurrentSnake = async (snakeId) => {
+    try {
+      setLoading(true);
+      const snakeDoc = doc(db, 'snakes', snakeId);
+      await deleteDoc(snakeDoc);
+    } catch (e) {
+      console.error('Error creating document', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     updateUser,
     addNewSnake,
@@ -156,5 +168,6 @@ export default function useFirestore() {
     fetchEvents,
     deleteEvent,
     loading,
+    deleteCurrentSnake,
   };
 }

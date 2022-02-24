@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -12,8 +11,9 @@ import { Alert, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function DeleteSnake(props) {
-  const { deleteSnake, setDeleteSnake, loading, snake } = props;
+  const { deleteSnake, setDeleteSnake, snake } = props;
   const [error, setError] = useState();
+  const { deleteCurrentSnake, loading } = useFirestore();
 
   console.log(snake);
 
