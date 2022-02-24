@@ -250,7 +250,7 @@ function DashboardContent() {
 
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', overflowX: 'auto' }}>
-                  <Events snake={snake} eventsData={eventsData} />
+                  <Events snake={snake} eventsData={eventsData} setEventsData={setEventsData} />
                 </Paper>
               </Grid>
             </Grid>

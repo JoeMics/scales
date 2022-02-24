@@ -8,18 +8,18 @@ import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 import useFirestore from '../../hooks/useFirestore';
 import Loading from './Loading';
+import EventDetails from './EventDetails';
+import { formatDate } from '../../utils/helpers';
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-function formatDate(date) {
-  return new Intl.DateTimeFormat([]).format(date);
-}
-
 export default function Orders(props) {
-  const { snake, eventsData } = props;
+  const { snake, eventsData, setEventsData } = props;
   const { loading } = useFirestore();
+  const [openEventDetails, setOpenEventDetails] = useState(false);
+  const [eventDetails, setEventDetails] = useState({});
 
   return (
     <>
@@ -38,7 +38,13 @@ export default function Orders(props) {
           {eventsData
             .sort((a, b) => b.date - a.date)
             .map((event) => (
-              <TableRow key={event.id} onClick={() => console.log(event.id)}>
+              <TableRow
+                key={event.id}
+                onClick={() => {
+                  setEventDetails(event);
+                  setOpenEventDetails(true);
+                }}
+              >
                 <TableCell>{formatDate(event.date.toDate())}</TableCell>
                 <TableCell>{event.type}</TableCell>
                 <TableCell>{event.notes}</TableCell>
@@ -50,6 +56,14 @@ export default function Orders(props) {
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
         see more
       </Link>
+      {openEventDetails && (
+        <EventDetails
+          openEventDetails={openEventDetails}
+          setOpenEventDetails={setOpenEventDetails}
+          eventDetails={eventDetails}
+          setEventsData={setEventsData}
+        />
+      )}
     </>
   );
 }
