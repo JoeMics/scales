@@ -40,7 +40,7 @@ export default function EventDetails(props) {
     <div>
       <Dialog open={openEventDetails} onClose={handleClose}>
         <DialogActions>
-          <IconButton onClick={handleClose}>
+          <IconButton sx={{ mb: '-1rem' }} onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </DialogActions>

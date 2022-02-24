@@ -1,10 +1,24 @@
+import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import DropDown from './SnakeDropDown';
 
 export default function SnakeStats(props) {
+  const { setDeleteSnake } = props;
+
   return (
     <>
-      <DropDown {...props} />
+      <div>
+        <DropDown {...props} />
+        <Button
+          sx={{ mb: '1rem' }}
+          color="error"
+          onClick={(e) => {
+            setDeleteSnake(true);
+          }}
+        >
+          DELETE
+        </Button>
+      </div>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         Last shed: 15 March, 2019
       </Typography>
