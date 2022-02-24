@@ -96,6 +96,7 @@ function DashboardContent() {
   const [open, setOpen] = useState(true);
   const [snake, setSnake] = useState({ name: '', id: '' });
   const [eventsData, setEventsData] = useState([]);
+  const [sort, setSort] = useState('descending');
 
   // Custom hooks
   const { fetchAllSnakes, fetchEvents } = useFirestore();
@@ -259,7 +260,13 @@ function DashboardContent() {
 
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', overflowX: 'auto' }}>
-                  <Events snake={snake} eventsData={eventsData} setEventsData={setEventsData} />
+                  <Events
+                    snake={snake}
+                    eventsData={eventsData}
+                    setEventsData={setEventsData}
+                    setSort={setSort}
+                    sort={sort}
+                  />
                 </Paper>
               </Grid>
             </Grid>
