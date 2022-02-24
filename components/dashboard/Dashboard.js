@@ -25,6 +25,7 @@ import AddEvent from './AddEvent';
 import styles from '../../styles/Dashboard.module.css';
 import SnakeStats from './SnakeStats';
 import useFirestore from '../../hooks/useFirestore';
+import DeleteSnake from './DeleteSnake';
 
 function Copyright(props) {
   return (
@@ -90,6 +91,7 @@ const mdTheme = createTheme();
 function DashboardContent() {
   const [openAddSnake, setOpenAddSnake] = useState(false);
   const [openAddEvent, setOpenAddEvent] = useState(false);
+  const [deleteSnake, setDeleteSnake] = useState(false);
   const [allSnakes, setAllSnakes] = useState([]);
   const [open, setOpen] = useState(true);
   const [snake, setSnake] = useState({ name: '', id: '' });
@@ -182,7 +184,7 @@ function DashboardContent() {
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
-              <ListItemText primary="New Snake" />
+              <ListItemText primary="Add Snake" />
             </ListItemButton>
             <ListItemButton
               onClick={(e) => {
@@ -243,7 +245,12 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <SnakeStats allSnakes={allSnakes} snake={snake} setSnake={setSnake} />
+                  <SnakeStats
+                    allSnakes={allSnakes}
+                    snake={snake}
+                    setSnake={setSnake}
+                    setDeleteSnake={setDeleteSnake}
+                  />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
@@ -275,6 +282,9 @@ function DashboardContent() {
           allSnakes={allSnakes}
           setEventsData={setEventsData}
         />
+      )}
+      {deleteSnake && (
+        <DeleteSnake deleteSnake={deleteSnake} setDeleteSnake={setDeleteSnake} snake={snake} />
       )}
     </ThemeProvider>
   );
