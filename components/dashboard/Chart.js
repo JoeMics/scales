@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
+import { formatDate } from '../../utils/helpers';
 
 // Generate Sales Data
 function createData(time, amount) {
@@ -12,12 +13,12 @@ export default function Chart({ eventsData }) {
   const theme = useTheme();
 
   const getData = () => {
-    const data = eventsData.map((event) => {
-      const fullDate = event.date.toDate();
-      const date = `${fullDate.getDay()}/${fullDate.getMonth()}/${fullDate.getFullYear()}`;
-      console.log(date);
-      return createData(date, event.weight);
-    });
+    const data = eventsData
+      .sort((a, b) => a.date - b.date)
+      .map((event) => {
+        const date = formatDate(event.date.toDate());
+        return createData(date, event.weight);
+      });
 
     return (
       <LineChart
