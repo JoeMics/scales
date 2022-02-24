@@ -113,7 +113,7 @@ function DashboardContent() {
     };
 
     getSnakes();
-  }, []);
+  }, [deleteSnake]);
 
   useEffect(() => {
     async function getAllEvents() {

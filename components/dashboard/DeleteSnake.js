@@ -9,13 +9,12 @@ import useFirestore from '../../hooks/useFirestore';
 import Loading from './Loading';
 import { Alert, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import fetchAllSnakes from '../../hooks/useFirestore';
 
 export default function DeleteSnake(props) {
   const { deleteSnake, setDeleteSnake, snake } = props;
   const [error, setError] = useState();
   const { deleteCurrentSnake, loading } = useFirestore();
-
-  console.log(snake);
 
   const handleClose = () => {
     setDeleteSnake(false);
