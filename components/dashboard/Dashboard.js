@@ -249,6 +249,7 @@ function DashboardContent() {
                     allSnakes={allSnakes}
                     snake={snake}
                     setSnake={setSnake}
+                    eventsData={eventsData}
                     setDeleteSnake={setDeleteSnake}
                     userID={authUser.uid}
                   />
