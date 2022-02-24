@@ -273,6 +273,7 @@ function DashboardContent() {
           snake={snake}
           setSnake={setSnake}
           allSnakes={allSnakes}
+          setEventsData={setEventsData}
         />
       )}
     </ThemeProvider>

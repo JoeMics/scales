@@ -21,14 +21,14 @@ const getTodayString = () => {
 };
 
 export default function AddEvent(props) {
-  const { openAddEvent, setOpenAddEvent, snake, setSnake, allSnakes } = props;
+  const { openAddEvent, setOpenAddEvent, snake, setSnake, allSnakes, setEventsData } = props;
   const [type, setType] = useState('Eat');
   const [date, setDate] = useState(getTodayString());
   const [notes, setNotes] = useState('');
   const [weight, setWeight] = useState('');
   const events = ['Eat', 'Shed', 'Weight', 'Poop'];
 
-  const { createEvent, loading } = useFirestore();
+  const { createEvent, fetchEvents, loading } = useFirestore();
 
   const handleChange = (event) => {
     setType(event.target.value);
@@ -50,6 +50,10 @@ export default function AddEvent(props) {
     };
 
     await createEvent(snake.id, data);
+
+    const updatedEvents = await fetchEvents(snake.id);
+    setEventsData(updatedEvents);
+
     handleClose();
   };
 
