@@ -232,7 +232,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Chart eventsData={eventsData} />
+                  <Chart eventsData={eventsData} snake={snake} />
                 </Paper>
               </Grid>
               {/* Snake Stats */}

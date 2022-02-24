@@ -3,13 +3,14 @@ import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 import { formatDate } from '../../utils/helpers';
+import SnakeStats from './SnakeStats';
 
 // Generate Sales Data
 function createData(time, amount) {
   return { time, amount };
 }
 
-export default function Chart({ eventsData }) {
+export default function Chart({ eventsData, snake }) {
   const theme = useTheme();
 
   const getData = () => {
@@ -46,7 +47,7 @@ export default function Chart({ eventsData }) {
               ...theme.typography.body1,
             }}
           >
-            Sales ($)
+            Weight (grams)
           </Label>
         </YAxis>
         <Line
@@ -66,7 +67,7 @@ export default function Chart({ eventsData }) {
 
   return (
     <>
-      <Title>Today</Title>
+      <Title>{snake.name}'s Weight</Title>
       <ResponsiveContainer>{getData()}</ResponsiveContainer>
     </>
   );
