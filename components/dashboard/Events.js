@@ -62,6 +62,7 @@ export default function Orders(props) {
           setOpenEventDetails={setOpenEventDetails}
           eventDetails={eventDetails}
           setEventsData={setEventsData}
+          snake={snake}
         />
       )}
     </>

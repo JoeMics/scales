@@ -9,6 +9,7 @@ import {
   query,
   where,
   Timestamp,
+  deleteDoc,
 } from 'firebase/firestore';
 import { useState } from 'react';
 import useFirebaseAuth from './useFirebaseAuth';
@@ -134,6 +135,18 @@ export default function useFirestore() {
     }
   };
 
+  const deleteEvent = async (snakeId, eventId) => {
+    try {
+      setLoading(true);
+      const eventDoc = doc(db, 'snakes', snakeId, 'events', eventId);
+      await deleteDoc(eventDoc);
+    } catch (e) {
+      console.error('Error creating document', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     updateUser,
     addNewSnake,
@@ -141,6 +154,7 @@ export default function useFirestore() {
     fetchAllSnakes,
     createEvent,
     fetchEvents,
+    deleteEvent,
     loading,
   };
 }
