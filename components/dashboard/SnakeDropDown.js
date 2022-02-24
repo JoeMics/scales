@@ -3,6 +3,7 @@ import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
+import { ArrowDropDown } from '@mui/icons-material';
 
 const blue = {
   100: '#DAECFF',
@@ -31,7 +32,7 @@ const StyledButton = styled('button')(
   font-size: 0.875rem;
   box-sizing: border-box;
   min-height: calc(1.5em + 22px);
-  min-width: 40%;
+  max-width: 17ch;
   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
   border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
   border-radius: 0.75em;
@@ -49,17 +50,6 @@ const StyledButton = styled('button')(
 
   &.${selectUnstyledClasses.focusVisible} {
     outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
-  }
-
-  &.${selectUnstyledClasses.expanded} {
-    &::after {
-      content: '▴';
-    }
-  }
-
-  &::after {
-    content: '▾';
-    float: right;
   }
   `
 );
@@ -162,7 +152,7 @@ export default function UnstyledSelectsMultiple({ setSnake, snake, allSnakes }) 
         {allSnakes.map((snake, index) => {
           return (
             <StyledOption key={index} value={snake}>
-              {snake.name}
+              <div className="inner-name">{snake.name}</div>
             </StyledOption>
           );
         })}
