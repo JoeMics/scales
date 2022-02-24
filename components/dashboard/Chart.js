@@ -15,6 +15,7 @@ export default function Chart({ eventsData }) {
   const getData = () => {
     const data = eventsData
       .sort((a, b) => a.date - b.date)
+      .filter((event) => event.type === 'Weight')
       .map((event) => {
         const date = formatDate(event.date.toDate());
         return createData(date, event.weight);
