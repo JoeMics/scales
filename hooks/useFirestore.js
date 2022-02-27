@@ -10,6 +10,7 @@ import {
   where,
   Timestamp,
   deleteDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import { useState } from 'react';
 import useFirebaseAuth from './useFirebaseAuth';
@@ -47,6 +48,22 @@ export default function useFirestore() {
       return { id: docSnap.id, ...docSnap.data() };
     } catch (e) {
       console.error('Error adding document: ', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const editSnake = async (name, snakeId) => {
+    try {
+      setLoading(true);
+
+      await updateDoc(doc(db, 'snakes', snakeId), {
+        name,
+      });
+
+      return { id: snakeId, name };
+    } catch (e) {
+      console.error('Error renaming snake: ', e);
     } finally {
       setLoading(false);
     }
@@ -169,5 +186,6 @@ export default function useFirestore() {
     deleteEvent,
     loading,
     deleteCurrentSnake,
+    editSnake,
   };
 }

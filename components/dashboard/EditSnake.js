@@ -13,7 +13,7 @@ import { Alert } from '@mui/material';
 
 export default function EditSnake(props) {
   const { openEditSnake, setOpenEditSnake, setAllSnakes, setSnake, snake } = props;
-  const { addNewSnake, loading } = useFirestore();
+  const { editSnake, loading } = useFirestore();
   const { authUser } = useAuth();
 
   const [name, setName] = useState(snake.name || '');
@@ -27,7 +27,7 @@ export default function EditSnake(props) {
     e.preventDefault();
 
     try {
-      const snakeDoc = await addNewSnake(name, authUser.uid);
+      const snakeDoc = await editSnake(name, snake.id);
       setAllSnakes((prev) => [...prev, snakeDoc]);
       setSnake(() => snakeDoc);
       handleClose();
