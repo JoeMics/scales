@@ -27,6 +27,7 @@ import styles from '../../styles/Dashboard.module.css';
 import SnakeStats from './SnakeStats';
 import useFirestore from '../../hooks/useFirestore';
 import DeleteSnake from './DeleteSnake';
+import EditSnake from './EditSnake';
 
 function Copyright(props) {
   return (
@@ -92,6 +93,7 @@ const mdTheme = createTheme();
 function DashboardContent() {
   const [openAddSnake, setOpenAddSnake] = useState(false);
   const [openAddEvent, setOpenAddEvent] = useState(false);
+  const [openEditSnake, setOpenEditSnake] = useState(false);
   const [deleteSnake, setDeleteSnake] = useState(false);
   const [allSnakes, setAllSnakes] = useState([]);
   const [open, setOpen] = useState(true);
@@ -253,6 +255,7 @@ function DashboardContent() {
                     setSnake={setSnake}
                     eventsData={eventsData}
                     setDeleteSnake={setDeleteSnake}
+                    setOpenEditSnake={setOpenEditSnake}
                     userID={authUser.uid}
                   />
                 </Paper>
@@ -281,6 +284,15 @@ function DashboardContent() {
           setOpenAddSnake={setOpenAddSnake}
           setSnake={setSnake}
           setAllSnakes={setAllSnakes}
+        />
+      )}
+      {openEditSnake && (
+        <EditSnake
+          openEditSnake={openEditSnake}
+          setOpenEditSnake={setOpenEditSnake}
+          setSnake={setSnake}
+          setAllSnakes={setAllSnakes}
+          snake={snake}
         />
       )}
       {openAddEvent && (

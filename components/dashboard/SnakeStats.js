@@ -4,7 +4,7 @@ import { formatDate } from '../../utils/helpers';
 import DropDown from './SnakeDropDown';
 
 export default function SnakeStats(props) {
-  const { setDeleteSnake, eventsData } = props;
+  const { setDeleteSnake, setOpenEditSnake, eventsData } = props;
 
   const weight = eventsData
     .sort((a, b) => b.date - a.date)
@@ -46,6 +46,15 @@ export default function SnakeStats(props) {
           }}
         >
           DELETE
+        </Button>
+        <Button
+          sx={{ ml: '2rem', mb: '.5rem' }}
+          color="info"
+          onClick={(e) => {
+            setOpenEditSnake(true);
+          }}
+        >
+          Edit
         </Button>
       </div>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
