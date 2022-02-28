@@ -67,7 +67,7 @@ export default function Chart({ eventsData, snake }) {
 
   return (
     <>
-      <Title>{snake.name}&apos;s Weight</Title>
+      <Title>{snake.name && `${snake.name}'s`} Weight</Title>
       <ResponsiveContainer>{getData()}</ResponsiveContainer>
     </>
   );

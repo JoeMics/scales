@@ -34,7 +34,7 @@ export default function Orders(props) {
     <>
       <Loading loading={loading} />
       <div>
-        <Title>{snake.name}&apos;s History</Title>
+        <Title>{snake.name && `${snake.name}'s`} History</Title>
         <Button onClick={handleSort}>
           {sort === 'ascending' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />} Sort
         </Button>
