@@ -113,7 +113,13 @@ export default function AddEvent(props) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">Submit</Button>
+            {snake ? (
+              <Button type="submit" disabled>
+                Submit
+              </Button>
+            ) : (
+              <Button type="submit">Submit</Button>
+            )}
           </DialogActions>
         </form>
       </Dialog>
