@@ -12,6 +12,8 @@ import EventDetails from './EventDetails';
 import { formatDate } from '../../utils/helpers';
 import { Button } from '@mui/material';
 import EditEvent from './EditEvent';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 function preventDefault(event) {
   event.preventDefault();
@@ -33,7 +35,9 @@ export default function Orders(props) {
       <Loading loading={loading} />
       <div>
         <Title>{snake.name}&apos;s History</Title>
-        <Button onClick={handleSort}>Sort</Button>
+        <Button onClick={handleSort}>
+          {sort === 'ascending' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />} Sort
+        </Button>
       </div>
       <Table size="small">
         <TableHead>

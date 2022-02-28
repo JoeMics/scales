@@ -62,7 +62,7 @@ export default function AddEvent(props) {
       <Loading loading={loading} />
       <Dialog open={openAddEvent} onClose={handleClose} fullWidth maxWidth="md">
         <form onSubmit={handleSubmit}>
-          <DialogTitle>ADD EVENT</DialogTitle>
+          <DialogTitle>Add Event</DialogTitle>
           <DialogContent>
             <DialogContentText>Make a note about your snake.</DialogContentText>
             <SnakeDropDown snake={snake} allSnakes={allSnakes} setSnake={setSnake} />

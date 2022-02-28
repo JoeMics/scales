@@ -208,7 +208,7 @@ function DashboardContent() {
               <ListItemIcon>
                 <PowerSettingsNewIcon />
               </ListItemIcon>
-              <ListItemText primary="logout" />
+              <ListItemText primary="Log Out" />
             </ListItemButton>
           </List>
         </Drawer>
