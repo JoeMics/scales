@@ -234,6 +234,7 @@ function DashboardContent() {
                     display: 'flex',
                     flexDirection: 'column',
                     height: 240,
+                    overflow: 'hidden',
                   }}
                 >
                   <Chart eventsData={eventsData} snake={snake} />
@@ -247,6 +248,7 @@ function DashboardContent() {
                     display: 'flex',
                     flexDirection: 'column',
                     height: 240,
+                    overflow: 'hidden',
                   }}
                 >
                   <SnakeStats

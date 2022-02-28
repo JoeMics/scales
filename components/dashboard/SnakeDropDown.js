@@ -32,7 +32,7 @@ const StyledButton = styled('button')(
   font-size: 0.875rem;
   box-sizing: border-box;
   min-height: calc(1.5em + 22px);
-  max-width: 17ch;
+  width: 100%;
   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
   border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
   border-radius: 0.75em;
@@ -147,7 +147,7 @@ CustomSelect.propTypes = {
 
 export default function UnstyledSelectsMultiple({ setSnake, snake, allSnakes }) {
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <CustomSelect value={snake} onChange={setSnake}>
         {allSnakes.map((snake, index) => {
           return (

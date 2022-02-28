@@ -38,8 +38,21 @@ export default function SnakeStats(props) {
     <>
       <div className="drop-delete">
         <DropDown {...props} />
+      </div>
+      <Typography color="text.secondary" sx={{ flex: 1, minWidth: '20ch' }}>
+        Current Weight: {weight[0]}
+      </Typography>
+      <Typography color="text.secondary" sx={{ flex: 1, minWidth: '20ch' }}>
+        Last Shed: {shedDate[0]}
+      </Typography>
+      <Typography color="text.secondary" sx={{ flex: 1, minWidth: '20ch' }}>
+        Last Fed: {fedDate[0]}
+      </Typography>
+      <Typography color="text.secondary" sx={{ flex: 1, minWidth: '20ch' }}>
+        Last Defecation: {poopDate[0]}
+      </Typography>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
-          sx={{ ml: '2rem', mb: '.5rem' }}
           color="error"
           onClick={(e) => {
             setDeleteSnake(true);
@@ -48,7 +61,6 @@ export default function SnakeStats(props) {
           DELETE
         </Button>
         <Button
-          sx={{ ml: '2rem', mb: '.5rem' }}
           color="info"
           onClick={(e) => {
             setOpenEditSnake(true);
@@ -57,18 +69,6 @@ export default function SnakeStats(props) {
           Edit
         </Button>
       </div>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        Current Weight: {weight[0]}
-      </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        Last shed: {shedDate[0]}
-      </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        Last fed: {fedDate[0]}
-      </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        Last poop: {poopDate[0]}
-      </Typography>
     </>
   );
 }
