@@ -64,10 +64,10 @@ export default function EventDetails(props) {
           </DialogContent>
           {error && <Alert severity="error">{error}</Alert>}
           <DialogActions>
-            <Button onClick={() => setOpenEditEvent(true)}>Edit</Button>
             <Button onClick={handleDelete} color="error">
               Delete
             </Button>
+            <Button onClick={() => setOpenEditEvent(true)}>Edit</Button>
           </DialogActions>
         </form>
       </Dialog>

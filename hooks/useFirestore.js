@@ -134,6 +134,36 @@ export default function useFirestore() {
     }
   };
 
+  const updateEvent = async (snakeId, eventId, { type, date, weight, notes }) => {
+    /* If date is hyphenated, the Date object will return a date 1 day behind
+     * This hack replaces hyphens with slashes
+     * https://stackoverflow.com/a/31732581 - "Another Strange One"
+     */
+    const formattedDate = date.replace('-', '/');
+
+    try {
+      setLoading(true);
+      if (weight) {
+        return await updateDoc(doc(db, 'snakes', snakeId, 'events', eventId), {
+          type,
+          notes,
+          weight,
+          date: Timestamp.fromDate(new Date(formattedDate)),
+        });
+      }
+
+      return await updateDoc(doc(db, 'snakes', snakeId, 'events', eventId), {
+        type,
+        notes,
+        date: Timestamp.fromDate(new Date(formattedDate)),
+      });
+    } catch (e) {
+      console.error('Error creating document', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchEvents = async (snakeId) => {
     try {
       setLoading(true);
@@ -182,6 +212,7 @@ export default function useFirestore() {
     fetchSnakeById,
     fetchAllSnakes,
     createEvent,
+    updateEvent,
     fetchEvents,
     deleteEvent,
     loading,

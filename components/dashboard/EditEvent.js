@@ -21,14 +21,21 @@ const toFormattedDate = (date) => {
 };
 
 export default function EditEvent(props) {
-  const { openEditEvent, setOpenEditEvent, snake, setEventsData, eventDetails } = props;
+  const {
+    openEditEvent,
+    setOpenEditEvent,
+    snake,
+    setEventsData,
+    eventDetails,
+    setOpenEventDetails,
+  } = props;
   const [type, setType] = useState(eventDetails.type);
   const [date, setDate] = useState(toFormattedDate(eventDetails.date.toDate()));
   const [notes, setNotes] = useState(eventDetails.notes);
   const [weight, setWeight] = useState(eventDetails.weight);
   const events = ['Eat', 'Shed', 'Weight', 'Poop'];
 
-  const { fetchEvents, loading } = useFirestore();
+  const { fetchEvents, updateEvent, loading } = useFirestore();
 
   const handleChange = (event) => {
     setType(event.target.value);
@@ -36,6 +43,7 @@ export default function EditEvent(props) {
 
   const handleClose = () => {
     setOpenEditEvent(false);
+    setOpenEventDetails(false);
   };
 
   const handleSubmit = async (event) => {
@@ -49,11 +57,10 @@ export default function EditEvent(props) {
       notes,
     };
 
-    console.log(data);
-    // await updateEvent(snake.id, data);
-    // const updatedEvents = await fetchEvents(snake.id);
-    // setEventsData(updatedEvents);
-    // handleClose();
+    await updateEvent(snake.id, eventDetails.id, data);
+    const updatedEvents = await fetchEvents(snake.id);
+    setEventsData(updatedEvents);
+    handleClose();
   };
 
   return (
