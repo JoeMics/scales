@@ -11,6 +11,7 @@ import Loading from './Loading';
 import EventDetails from './EventDetails';
 import { formatDate } from '../../utils/helpers';
 import { Button } from '@mui/material';
+import EditEvent from './EditEvent';
 
 function preventDefault(event) {
   event.preventDefault();
@@ -21,6 +22,7 @@ export default function Orders(props) {
   const { loading } = useFirestore();
   const [openEventDetails, setOpenEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState({});
+  const [openEditEvent, setOpenEditEvent] = useState(false);
 
   const handleSort = () => {
     sort === 'descending' ? setSort('ascending') : setSort('descending');
@@ -88,6 +90,16 @@ export default function Orders(props) {
           setOpenEventDetails={setOpenEventDetails}
           eventDetails={eventDetails}
           setEventsData={setEventsData}
+          setOpenEditEvent={setOpenEditEvent}
+          snake={snake}
+        />
+      )}
+      {openEditEvent && (
+        <EditEvent
+          eventDetails={eventDetails}
+          setEventsData={setEventsData}
+          setOpenEditEvent={setOpenEditEvent}
+          openEditEvent={openEditEvent}
           snake={snake}
         />
       )}

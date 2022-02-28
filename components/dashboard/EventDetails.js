@@ -11,7 +11,14 @@ import { Alert, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function EventDetails(props) {
-  const { openEventDetails, setOpenEventDetails, eventDetails, setEventsData, snake } = props;
+  const {
+    openEventDetails,
+    setOpenEventDetails,
+    eventDetails,
+    setEventsData,
+    setOpenEditEvent,
+    snake,
+  } = props;
   const { deleteEvent, loading } = useFirestore();
 
   const [error, setError] = useState();
@@ -57,7 +64,7 @@ export default function EventDetails(props) {
           </DialogContent>
           {error && <Alert severity="error">{error}</Alert>}
           <DialogActions>
-            <Button onClick={() => console.log('To be continued 😊')}>Edit</Button>
+            <Button onClick={() => setOpenEditEvent(true)}>Edit</Button>
             <Button onClick={handleDelete} color="error">
               Delete
             </Button>
