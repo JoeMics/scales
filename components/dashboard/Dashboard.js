@@ -157,10 +157,13 @@ function DashboardContent() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-              Dashboard
-            </Typography>
-            <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ justifyContent: 'flex-end' }}
+            >
               {authUser && authUser.email}
             </Typography>
           </Toolbar>
