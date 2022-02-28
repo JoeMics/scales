@@ -29,7 +29,7 @@ export default function SnakeStats(props) {
 
   const poopDate = eventsData
     .sort((a, b) => b.date - a.date)
-    .filter((event) => event.type === 'Poop')
+    .filter((event) => event.type === 'Defecation')
     .map((event) => {
       return formatDate(event.date.toDate());
     });

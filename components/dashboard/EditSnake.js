@@ -7,14 +7,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useFirestore from '../../hooks/useFirestore';
-import { useAuth } from '../../providers/AuthUserContext';
 import Loading from './Loading';
 import { Alert } from '@mui/material';
 
 export default function EditSnake(props) {
   const { openEditSnake, setOpenEditSnake, setAllSnakes, setSnake, snake } = props;
   const { editSnake, loading } = useFirestore();
-  const { authUser } = useAuth();
 
   const [name, setName] = useState(snake.name || '');
   const [error, setError] = useState();

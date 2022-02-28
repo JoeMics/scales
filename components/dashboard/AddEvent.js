@@ -26,7 +26,7 @@ export default function AddEvent(props) {
   const [date, setDate] = useState(getTodayString());
   const [notes, setNotes] = useState('');
   const [weight, setWeight] = useState('');
-  const events = ['Eat', 'Shed', 'Weight', 'Poop'];
+  const events = ['Eat', 'Shed', 'Weight', 'Defecation'];
 
   const { createEvent, fetchEvents, loading } = useFirestore();
 
@@ -91,6 +91,7 @@ export default function AddEvent(props) {
                 type="number"
                 placeholder="ex. 200"
                 fullWidth
+                required
                 variant="standard"
                 value={weight}
                 onChange={(event) => setWeight(event.target.value)}
@@ -112,7 +113,7 @@ export default function AddEvent(props) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">Subscribe</Button>
+            <Button type="submit">Submit</Button>
           </DialogActions>
         </form>
       </Dialog>

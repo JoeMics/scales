@@ -33,7 +33,7 @@ export default function EditEvent(props) {
   const [date, setDate] = useState(toFormattedDate(eventDetails.date.toDate()));
   const [notes, setNotes] = useState(eventDetails.notes);
   const [weight, setWeight] = useState(eventDetails.weight);
-  const events = ['Eat', 'Shed', 'Weight', 'Poop'];
+  const events = ['Eat', 'Shed', 'Weight', 'Defecation'];
 
   const { fetchEvents, updateEvent, loading } = useFirestore();
 
@@ -98,6 +98,7 @@ export default function EditEvent(props) {
                 fullWidth
                 variant="standard"
                 value={weight}
+                required
                 onChange={(event) => setWeight(event.target.value)}
               />
             )}
