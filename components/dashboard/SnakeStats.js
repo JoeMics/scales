@@ -40,16 +40,16 @@ export default function SnakeStats(props) {
         <DropDown {...props} />
       </div>
       <Typography color="text.secondary" sx={{ flex: 1, minWidth: '20ch' }}>
-        Current Weight: {weight[0]}
+        Current Weight: {weight[0] || 'N/A'}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1, minWidth: '20ch' }}>
-        Last Shed: {shedDate[0]}
+        Last Shed: {shedDate[0] || 'N/A'}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1, minWidth: '20ch' }}>
-        Last Fed: {fedDate[0]}
+        Last Fed: {fedDate[0] || 'N/A'}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1, minWidth: '20ch' }}>
-        Last Defecation: {poopDate[0]}
+        Last Defecation: {poopDate[0] || 'N/A'}
       </Typography>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
