@@ -28,19 +28,7 @@ import SnakeStats from './SnakeStats';
 import useFirestore from '../../hooks/useFirestore';
 import DeleteSnake from './DeleteSnake';
 import EditSnake from './EditSnake';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from '../Copyright';
 
 const drawerWidth = 240;
 
