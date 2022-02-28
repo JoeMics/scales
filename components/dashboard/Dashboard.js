@@ -185,9 +185,7 @@ function DashboardContent() {
                 setOpenAddSnake(true);
               }}
             >
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
+              <ListItemIcon>🐍</ListItemIcon>
               <ListItemText primary="Add Snake" />
             </ListItemButton>
             <ListItemButton
@@ -195,9 +193,7 @@ function DashboardContent() {
                 setOpenAddEvent(true);
               }}
             >
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
+              <ListItemIcon>📝</ListItemIcon>
               <ListItemText primary="Add Event" />
             </ListItemButton>
             <Divider sx={{ my: 1 }} />
