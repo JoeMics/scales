@@ -23,6 +23,10 @@
 
 # Screenshots
 
+![Dashboard](./docs/images/dashboard.png)
+![Event Details](./docs/images/event_details.png)
+![Event Form](./docs/images/event_form.png)
+
 # Tech Stack
 
 - Next.js
