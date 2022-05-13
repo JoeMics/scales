@@ -23,8 +23,10 @@ export default function Chart({ eventsData, snake }) {
       });
 
     const lastData = data.length - 1;
-    const maxGrams = Number(data[lastData].amount) + 200;
+    const maxGrams = 1000
     
+    data.length > 0 ? maxGrams = Number(data[lastData].amount) + 200 : null
+
     return (
       <LineChart
         data={data}
