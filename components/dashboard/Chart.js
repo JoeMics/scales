@@ -22,6 +22,11 @@ export default function Chart({ eventsData, snake }) {
         return createData(date, event.weight);
       });
 
+    const lastData = data.length - 1;
+    const maxGrams = Number(data[lastData].amount) + 200;
+
+    console.log(maxGrams)
+
     return (
       <LineChart
         data={data}
@@ -37,7 +42,7 @@ export default function Chart({ eventsData, snake }) {
           stroke={theme.palette.text.secondary}
           style={theme.typography.body2}
         />
-        <YAxis stroke={theme.palette.text.secondary} style={theme.typography.body2}>
+        <YAxis type='number' domain={[0, maxGrams]} stroke={theme.palette.text.secondary} style={theme.typography.body2}>
           <Label
             angle={270}
             position="left"
