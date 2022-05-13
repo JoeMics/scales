@@ -24,9 +24,7 @@ export default function Chart({ eventsData, snake }) {
 
     const lastData = data.length - 1;
     const maxGrams = Number(data[lastData].amount) + 200;
-
-    console.log(maxGrams)
-
+    
     return (
       <LineChart
         data={data}
